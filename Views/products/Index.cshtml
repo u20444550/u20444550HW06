@@ -10,9 +10,8 @@
 @using (Html.BeginForm("Index", "products", FormMethod.Post))
 {
 <input type="text" name="search" placeholder="Enter Name" id="text" />
-                <input type="submit" name="submit" class="btn btn-warning btn-sm" value="SEARCH" />
-                                <button type="button" id="createProductButton" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">ADD</button>
-}
+<input type="submit" name="submit" class="btn btn-info btn-sm" value="SEARCH" />
+<button type="button" id="createProductButton" class="btn btn-warning" data-toggle="modal" data-target="#myModal">Create</button>}
 
 <table class="table" id="productGrid">
     <tr>
@@ -53,12 +52,11 @@
         @Html.DisplayFor(modelItem => item.categories.category_name)
     </td>
     <td>
-        <button type="button" id="btnEdit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" data-id="@item.product_id">EDIT</button>
+        <button type="button" id="btnEdit" class="btn btn-info" data-toggle="modal" data-target="#myModal" data-id="@item.product_id">EDIT</button>
         <button type="button" id="btnDelete" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" data-id="@item.product_id">DELETE</button>
-        <button type="button" id="btnDetails" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" data-id="@item.product_id">DETAILS</button>
+        <button type="button" id="btnDetails" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" data-id="@item.product_id">DETAILS</button>
     </td>
-</tr>
-}
+</tr>}
 
 </table>
 <div id="div1"></div>

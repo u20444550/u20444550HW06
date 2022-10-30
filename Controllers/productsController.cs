@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using u20444550HW06.Models;
+using Newtonsoft;
 
 namespace u20444550HW06.Controllers
 {
@@ -86,21 +87,7 @@ namespace u20444550HW06.Controllers
         }
     }
 
-    //[HttpGet]
-    //public ActionResult EditProduct(products productId)
-    //{
-    //    return View();
-    //}
-
-    //[HttpPost]
-    //public ActionResult EditProductpost(products request)
-    //{
-    //    db.products.Add(request);
-    //    db.SaveChanges();
-    //    return Json(request);
-
-
-    //}
+    
 
 
 }
