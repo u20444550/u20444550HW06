@@ -52,7 +52,9 @@ namespace u20444550HW06.Controllers
         [HttpPost]
         public ActionResult Details(int productId)
         {
-            return PartialView("Details", db.products.Where(x => x.product_id == productId).ToList());
+            ViewBag.stocks = db.stocks;
+            return PartialView("Details", db.products.Include(p => p.stocks).Where(x => x.product_id == productId).ToList());
+            
         }
 
 

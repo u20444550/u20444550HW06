@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<u20444550HW06.Models.products>
+
+
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <h3>DETAILS </h3>
@@ -42,4 +45,35 @@
     </td>
 </tr>}
 </table>
+
+@*<table>
+    <tr>
+        <th>
+            Store
+        </th>
+        <th>
+            Quantity
+        </th>
+
+    </tr>
+
+    @foreach (var s in ViewBag.stocks)
+    {
+<tr>
+    <td>
+        @s.store.store_name
+    </td>
+    if (s.quantity == 0)
+    {
+    <td style="color: red">Out of Stock</td>
+    }
+    else
+    {
+     <td>@s.quantity</td>
+    }
+
+</tr>
+}
+
+</table>*@
 
