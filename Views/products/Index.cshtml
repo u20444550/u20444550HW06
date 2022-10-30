@@ -1,0 +1,187 @@
+﻿@model IPagedList<u20444550HW06.Models.products>
+@using PagedList.Mvc;
+@using PagedList;
+
+@{ ViewBag.Title = "Index"; }
+
+<h2>Products</h2>
+
+
+@using (Html.BeginForm("Index", "products", FormMethod.Post))
+{
+<input type="text" name="search" placeholder="Enter Name" id="text" />
+                <input type="submit" name="submit" class="btn btn-warning btn-sm" value="SEARCH" />
+                                <button type="button" id="createProductButton" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">ADD</button>
+}
+
+<table class="table" id="productGrid">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Year
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Category
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.product_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.model_year)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.list_price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.brands.brand_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.categories.category_name)
+    </td>
+    <td>
+        <button type="button" id="btnEdit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" data-id="@item.product_id">EDIT</button>
+        <button type="button" id="btnDelete" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" data-id="@item.product_id">DELETE</button>
+        <button type="button" id="btnDetails" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" data-id="@item.product_id">DETAILS</button>
+    </td>
+</tr>
+}
+
+</table>
+<div id="div1"></div>
+@Html.PagedListPager(Model, i => Url.Action("Index", "products", new { i, search = Request.QueryString["search"] }))
+
+<div class="modal fade" role="dialog" id="createProductFormModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Modal display</h4>
+            </div>
+            <div id="createProductFormModalbody" class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <br />
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $("#createProductButton").click(function () {
+            var productId = $(this).data('id');
+            console.log(productId)
+            $.ajax({
+                type: "POST",
+                url: '/products/Add',
+                data: '{productId: "' + productId + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (data) {
+                    $('#createProductFormModalbody').html(data);
+                    $('#createProductFormModal').modal('show');
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+
+
+
+        $("#productGrid #btnEdit").click(function () {
+            var productId = $(this).data('id');
+            console.log(productId)
+            $.ajax({
+                type: "POST",
+                url: '/products/Edit',
+                data: '{productId: "' + productId + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (data) {
+                    $('#createProductFormModalbody').html(data);
+                    $('#createProductFormModal').modal('show');
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+
+
+
+
+        $("#productGrid #btnDelete").click(function () {
+            var productId = $(this).data('id');
+            console.log(productId)
+            $.ajax({
+                type: "POST",
+                url: '/products/Delete',
+                data: '{productId: "' + productId + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (data) {
+                    $('#createProductFormModalbody').html(data);
+                    $('#createProductFormModal').modal('show');
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+
+
+
+        $("#productGrid #btnDetails").click(function () {
+            var productId = $(this).data('id');
+            console.log(productId)
+            $.ajax({
+                type: "POST",
+                url: '/products/Details',
+                data: '{productId: "' + productId + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (data) {
+                    $('#createProductFormModalbody').html(data);
+                    $('#createProductFormModal').modal('show');
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+    });
+</script>
+

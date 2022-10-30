@@ -1,0 +1,89 @@
+﻿
+@model IPagedList<u20444550HW06.Models.orders>
+@using PagedList.Mvc;
+@using PagedList;
+<h2>Orders</h2>
+@using (Html.BeginForm("Index", "order", FormMethod.Post))
+{
+    <input type="date" name="date" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31">
+    <input type="submit" name="submit" value="search" />
+
+}
+@using (Html.BeginForm("Index", "order", FormMethod.Get))
+{
+    <input type="submit" name="submit" value="clear search" />
+
+}
+
+<br />
+@foreach (var item in Model)
+{
+    <h2>Order:@Html.DisplayFor(modelItem => item.order_id) - @Convert.ToDateTime(item.order_date).ToString("yyyy/MM/dd")</h2>
+
+    <table class="table">
+
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+                List Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Total
+            </th>
+        </tr>
+        @{
+            decimal GrandTotal = 0;
+
+        }
+        @foreach (var var in item.order_items)
+        {
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => var.products.product_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => var.list_price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => var.quantity)
+                </td>
+                <td>
+                    @(var.list_price * var.quantity)
+                </td>
+            </tr>
+            GrandTotal += (var.list_price * var.quantity);
+
+        }
+        <tfoot>
+            <tr>
+                <th id="total" colspan="3">Grand Total :</th>
+                <td>@GrandTotal</td>
+            </tr>
+        </tfoot>
+
+    </table>
+
+}
+@Html.PagedListPager(Model, i => Url.Action("Index", "order", new { i, search = Request.QueryString["search"] }))
+<style>
+    #total {
+        text-align: right;
+    }
+
+    #table {
+        border: 1px solid red;
+        border-collapse: separate;
+    }
+
+        #table th, #table td {
+            border: 1px solid #000;
+        }
+</style>
+

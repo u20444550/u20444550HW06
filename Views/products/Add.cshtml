@@ -1,0 +1,79 @@
+﻿<h2>ADD</h2>
+
+<input type="text"  id="Name" class="form-control" placeholder="Product Name" required="" />
+<br />
+<input type="text"  id="Year" class="form-control" placeholder="Year" required="" />
+<br />
+<input type="text"  id="Price" class="form-control" placeholder="Price" required="" />
+<br />
+
+<label for="drop-down">Brand:</label>
+<select name="drop-down" id="Brand">
+    <option value="1">Electra</option>
+    <option value="2">Haro</option>
+    <option value="3">Heller</option>
+    <option value="4">Pure Cycles</option>
+    <option value="5">Ritchey</option>
+    <option value="6">Strider</option>
+    <option value="7">Sun Bicycles</option>
+    <option value="8">Surly</option>
+    <option value="9">Trek</option>
+</select>
+<br />
+
+<label for="drop-down">Category:</label>
+<select name="drop-down" id="Category">
+    <option value="1">Children Bicycles</option>
+    <option value="2">Comfort Bicycles</option>
+    <option value="3">Cruisers Bicycles</option>
+    <option value="4">Pure Cycles</option>
+    <option value="5">Cyclocross Bicycles</option>
+    <option value="6">Electric Bikes</option>
+    <option value="7">Sun Bicycles</option>
+    <option value="8">Mountain Bikes</option>
+    <option value="9">Road Bikes</option>
+</select>
+<br />
+
+
+<div class="form-group col-md-6">
+    <div style="float: right; display:inline-block;">
+        <input class="btn btn-primary" name="submitButton" id="btnSave" value="Save" type="button">
+    </div>
+</div>
+<br />
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#btnSave").click(function () {
+           
+            var request = { product_name: $("#Name").val(), model_year: $("#Year").val(), list_price: $("#Price").val(), brand_id: $("#Brand").val(), category_id: $("#Category").val() };
+
+            console.log(request);
+            $.ajax({
+                type: "POST",
+                url: "/products/AddProduct",
+                data: JSON.stringify(request),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    alert("Product successfully added: ");
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+            console.log(request);
+            return false;
+        });
+    });
+
+
+
+</script>
+

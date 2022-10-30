@@ -1,0 +1,58 @@
+﻿<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var GraphData = [];
+    var JanData = @ViewBag.GraphData[0];
+    var FebData = @ViewBag.GraphData[1];
+    var MarData = @ViewBag.GraphData[2];
+    var AprData = @ViewBag.GraphData[3];
+    var MayData = @ViewBag.GraphData[4];
+    var JunData = @ViewBag.GraphData[5];
+    var JulData = @ViewBag.GraphData[6];
+    var AugData = @ViewBag.GraphData[7];
+    var SepData = @ViewBag.GraphData[8];
+    var OktData = @ViewBag.GraphData[9];
+    var NovData = @ViewBag.GraphData[10];
+    var DecData = @ViewBag.GraphData[11];
+
+    GraphData.push(JanData, FebData, MarData, AprData, MayData, JunData, JulData, AugData, SepData, OktData, NovData, DecData)
+    const labels = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: GraphData,
+        }]
+    };
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {}
+    };
+</script>
+
+<script>
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+</script>

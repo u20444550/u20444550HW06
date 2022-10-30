@@ -1,0 +1,45 @@
+﻿@model IEnumerable<u20444550HW06.Models.products>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<h3>EDIT </h3>
+
+<table class="table" id="productGrid">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Year
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Category
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.product_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.model_year)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.list_price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.brands.brand_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.categories.category_name)
+    </td>
+</tr>}
+</table>
+
